@@ -1,0 +1,26 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Reset */
+html,
+body,
+div {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Helps fonts on OSX look more consistent with other systems */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Use momentum-based scrolling on iOS devices */
+  -webkit-overflow-scrolling: touch;
+}
