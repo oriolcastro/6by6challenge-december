@@ -31,7 +31,7 @@ const Layout = ({ children }) => (
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div style={{ flex: '1' }}>{children}</div>
+        <div style={{ flex: '1', margin: '8px' }}>{children}</div>
         <Footer />
       </div>
     )}
