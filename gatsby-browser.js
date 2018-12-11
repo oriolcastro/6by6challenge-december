@@ -9,7 +9,7 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>{element}</ApolloProvider>
 )
 
-export const onInitialClientRender = () => {
+export const onClientEntry = () => {
   if (typeof window !== 'undefined') {
     if (window.localStorage.getItem('userId')) {
       console.log(

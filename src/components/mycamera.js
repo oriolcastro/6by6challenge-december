@@ -82,13 +82,12 @@ class MyCamera extends Component {
               color="default"
               variant="text"
               onClick={this.toogleCameraMode}
-              has
             >
               Canvia a la càmera{' '}
               {this.state.idealFacingMode === 'user' ? (
-                <CameraRear color="default" />
+                <CameraRear color="inherit" />
               ) : (
-                <CameraFront />
+                <CameraFront color="inherit" />
               )}
             </Button>
           )}
