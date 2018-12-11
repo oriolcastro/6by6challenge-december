@@ -2,9 +2,9 @@ import ApolloClient from 'apollo-boost'
 import fetch from 'isomorphic-fetch'
 
 export const client = new ApolloClient({
-  uri: process.env.HASURA_GRAPHQL_ENDPOINT,
+  uri: 'https://jumbocall-6by6december.herokuapp.com/v1alpha1/graphql',
   fetch,
   headers: {
-    'X-Hasura-Access-Key': process.env.HASURA_GRAPHQL_ACCESS_KEY,
+    'X-Hasura-Access-Key': 'XcleNaUXeNtIcAuCIpLi',
   },
 })
