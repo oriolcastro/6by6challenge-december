@@ -7,6 +7,8 @@ import PostForm from '../components/postform'
 import withRoot from '../withRoot'
 import { CREATE_USER } from '../apollo/queries'
 
+const windowGlobal = typeof window !== 'undefined' && window
+
 class IndexPage extends Component {
   constructor(props) {
     super(props)
