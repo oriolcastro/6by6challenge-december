@@ -1,14 +1,15 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
-
-// You can delete this file if you're not using it
 const React = require('react')
 const { renderToString } = require('react-dom/server')
 const JssProvider = require('react-jss/lib/JssProvider').default
 const getPageContext = require('./src/getPageContext').default
+
+import { ApolloProvider } from 'react-apollo'
+import { client } from './src/apollo/client'
+
+//Wrap the main component with the provedier from Apollo to query the graphql endpoint
+export const wrapRootElement = ({ element }) => (
+  <ApolloProvider client={client}>{element}</ApolloProvider>
+)
 
 function replaceRenderer({
   bodyComponent,
@@ -37,4 +38,4 @@ function replaceRenderer({
   ])
 }
 
-exports.replaceRenderer = replaceRenderer
+export default replaceRenderer

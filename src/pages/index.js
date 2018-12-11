@@ -1,41 +1,49 @@
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Person from '@material-ui/icons/Person'
-import Group from '@material-ui/icons/Group'
-import TextField from '@material-ui/core/TextField'
+import uuidv1 from 'uuid/v1'
+import { Mutation } from 'react-apollo'
 
 import Layout from '../components/layout'
-import MyCamera from '../components/mycamera'
+import PostForm from '../components/postform'
 import withRoot from '../withRoot'
+import { CREATE_USER } from '../apollo/queries'
+
+const isBrowser = typeof window !== `undefined`
+if (isBrowser) {
+  if (localStorage.getItem('userId')) {
+    console.log(
+      'There is already a userId stored locally that will be added to state'
+    )
+  } else {
+    console.log(
+      'There is not a userId. It will be created, stored locally and added to state'
+    )
+    const userId = uuidv1()
+    localStorage.setItem('userId', userId)
+  }
+}
 
 class IndexPage extends Component {
   constructor(props) {
     super(props)
+    this.state = { userId: localStorage.userId }
   }
 
   render() {
     return (
       <Layout>
-        <Typography gutterBottom>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet
-          tincidunt est. Proin congue finibus tellus, vitae semper arcu
-          hendrerit porta. Cras nulla sapien, ornare at venenatis sit amet,
-          tristique eget massa.
+        <Typography gutterBottom align="justify" paragraph>
+          Fes-te una foto amb la càmera, escriu el teu missatge i publica-la
+          perquè aparegui a la pantalla gegant.
         </Typography>
-        <MyCamera />
-
-        <TextField
-          fullWidth
-          label="Missatge"
-          placeholder="Escriu aquí el teu missatge"
-          margin="normal"
-          variant="outlined"
-        />
-        <Button variant="contained" color="secondary">
-          Publica
-        </Button>
+        <Mutation
+          mutation={CREATE_USER}
+          variables={{ user_id: localStorage.getItem('userId') }}
+        >
+          {(insertUser, { data, loading, error }) => (
+            <PostForm userId={this.state.userId} insertUser={insertUser} />
+          )}
+        </Mutation>
       </Layout>
     )
   }

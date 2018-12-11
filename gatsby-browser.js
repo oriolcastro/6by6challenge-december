@@ -1,9 +1,9 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import './src/styles/styles.css'
+import React from 'react'
+import { ApolloProvider } from 'react-apollo'
+import { client } from './src/apollo/client'
 
-// You can delete this file if you're not using it
-require('./src/styles/styles.css')
-exports.onClientEntry = () => {}
+//Wrap the main component with the provedier from Apollo to query the graphql endpoint
+export const wrapRootElement = ({ element }) => (
+  <ApolloProvider client={client}>{element}</ApolloProvider>
+)
