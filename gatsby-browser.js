@@ -11,7 +11,7 @@ export const wrapRootElement = ({ element }) => (
 
 export const onInitialClientRender = () => {
   if (typeof window !== 'undefined') {
-    if (windowGlobal.localStorage.getItem('userId')) {
+    if (window.localStorage.getItem('userId')) {
       console.log(
         'There is already a userId stored locally that will be added to state'
       )
