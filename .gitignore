@@ -52,7 +52,7 @@ typings/
 *.tgz
 
 # dotenv environment variables file
-.env
+.env.development
 
 # gatsby files
 .cache/
@@ -67,3 +67,6 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# VS Code files
+.vscode
