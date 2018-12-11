@@ -23,9 +23,11 @@ class PostForm extends Component {
     this.openCamera = this.openCamera.bind(this)
   }
 
-  componentDidMount() {
-    const { insertUser } = this.props
-    insertUser()
+  componentDidUpdate(prevProps) {
+    if (this.props.userId !== prevProps.userId) {
+      const { insertUser } = this.props
+      insertUser()
+    }
   }
 
   openCamera() {

@@ -16,7 +16,7 @@ class IndexPage extends Component {
   }
 
   componentDidMount() {
-    this.setState({ userId: windowGlobal.localStorage.userId })
+    this.setState({ userId: window.localStorage.userId })
   }
 
   render() {
