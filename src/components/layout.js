@@ -27,7 +27,9 @@ const Layout = ({ children }) => (
             { name: 'keywords', content: 'sample, something' },
           ]}
         >
-          <html lang="en" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <html lang="ca" />
+          <meta charSet="utf-8" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div style={{ flex: '1', margin: '8px' }}>{children}</div>

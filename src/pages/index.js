@@ -21,7 +21,7 @@ const IndexPage = () => (
         </Typography>
       </Grid>
     </Grid>
-    <AppWrap />
+    <AppWrap style={{ marginBottom: '32px' }} />
   </Layout>
 )
 
