@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import MyCamera from '../components/mycamera'
 import { ADD_POST } from '../apollo/queries'
 
 class PostForm extends Component {
@@ -14,26 +13,15 @@ class PostForm extends Component {
     this.state = {
       message: '',
       pictureUrl: '',
-      capturedImage: '',
-      isOpen: false,
+      isLoading: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.uploadPicture = this.uploadPicture.bind(this)
-    this.takePicture = this.takePicture.bind(this)
-    this.openCamera = this.openCamera.bind(this)
   }
 
   componentDidMount() {
     console.log(`This is the props userID ${this.props.userId}`)
     this.props.insertUser()
-  }
-
-  openCamera() {
-    this.setState({ isOpen: true })
-  }
-
-  takePicture(data) {
-    this.setState({ capturedImage: data, isOpen: false })
   }
 
   async uploadPicture() {
@@ -43,7 +31,7 @@ class PostForm extends Component {
           process.env.CLOUDINARY_CLOUD_NAME
         }/image/upload`,
         {
-          file: this.state.capturedImage,
+          file: this.props.capturedImage,
           upload_preset: process.env.CLOUDINARY_CLOUD_PRESET,
         }
       )
@@ -62,47 +50,52 @@ class PostForm extends Component {
     return (
       <Mutation mutation={ADD_POST}>
         {(insert_posts, { loading, error }) => (
-          <div>
-            <MyCamera
-              isOpen={this.state.isOpen}
-              capturedImage={this.state.capturedImage}
-              openCamera={this.openCamera}
-              onTakePicture={this.takePicture}
+          <form
+            onSubmit={async e => {
+              e.preventDefault()
+              this.setState({ isLoading: true })
+              await this.uploadPicture()
+              await insert_posts({
+                variables: {
+                  imgUrl: this.state.pictureUrl,
+                  message: this.state.message,
+                  user_id: this.props.userId,
+                },
+              })
+              console.log('Post submited to the server')
+              this.setState({
+                message: '',
+                pictureUrl: '',
+                isLoading: false,
+              })
+              await this.props.deletePicture()
+            }}
+          >
+            <TextField
+              disabled={this.props.capturedImage ? false : true}
+              fullWidth
+              required
+              label="Missatge"
+              placeholder="Escriu aquí el teu missatge"
+              margin="normal"
+              variant="outlined"
+              value={this.state.message}
+              onChange={this.handleChange}
             />
-            <form
-              onSubmit={async e => {
-                e.preventDefault()
-                await this.uploadPicture()
-                await insert_posts({
-                  variables: {
-                    imgUrl: this.state.pictureUrl,
-                    message: this.state.message,
-                    user_id: this.props.userId,
-                  },
-                })
-                console.log('Mutation performed')
-                this.setState({
-                  message: '',
-                  pictureUrl: '',
-                  capturedImage: '',
-                })
-              }}
+            <Button
+              disabled={this.state.isLoading}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
             >
-              <TextField
-                fullWidth
-                label="Missatge"
-                placeholder="Escriu aquí el teu missatge"
-                margin="normal"
-                variant="outlined"
-                value={this.state.message}
-                onChange={this.handleChange}
-              />
-              <Button type="submit" variant="contained" color="primary">
-                {loading ? <CircularProgress /> : 'Publica'}
-              </Button>
-            </form>
-            {error && <p>Error</p>}
-          </div>
+              {this.state.isLoading ? (
+                <CircularProgress size={30} />
+              ) : (
+                'Publica'
+              )}
+            </Button>
+          </form>
         )}
       </Mutation>
     )

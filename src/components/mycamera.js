@@ -20,12 +20,13 @@ class MyCamera extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      idealFacingMode: FACING_MODES.USER,
+      idealFacingMode: FACING_MODES.ENVIRONMENT,
     }
     this.toogleCameraMode = this.toogleCameraMode.bind(this)
   }
 
   toogleCameraMode(prevState) {
+    console.log(FACING_MODES)
     if (prevState.idealFacingMode === 'user') {
       this.setState({ idealFacingMode: FACING_MODES.ENVIRONMENT })
     } else {
@@ -42,57 +43,55 @@ class MyCamera extends Component {
       onTakePicture,
     } = this.props
     return (
-      <>
-        <Paper>
-          {isOpen ? (
-            <div>
-              <Camera
-                idealFacingMode={this.state.idealFacingMode}
-                onTakePhoto={dataUri => {
-                  onTakePicture(dataUri)
-                }}
-                idealResolution={{ width: 1980, height: 1080 }}
-                isMaxResolution={true}
-                imageType={IMAGE_TYPES.JPG}
+      <Paper>
+        {isOpen ? (
+          <div>
+            <Camera
+              idealFacingMode={this.state.idealFacingMode}
+              onTakePhoto={dataUri => {
+                onTakePicture(dataUri)
+              }}
+              //idealResolution={{ width: 1980, height: 1080 }}
+              isMaxResolution={true}
+              imageType={IMAGE_TYPES.JPG}
+              sizeFactor={0.5}
+            />
+          </div>
+        ) : (
+          <Grid container justify="center" alignItems="center">
+            {capturedImage ? (
+              <img
+                src={capturedImage}
+                style={{ width: '100%', display: 'block' }}
               />
-            </div>
-          ) : (
-            <Grid container justify="center" alignItems="center">
-              {capturedImage ? (
-                <div style={{ maxWidth: '600px' }}>
-                  <img
-                    src={capturedImage}
-                    style={{ width: '100%', display: 'block' }}
-                  />
-                </div>
-              ) : (
-                <Grid item onClick={openCamera}>
-                  <AddAPhoto
-                    color="action"
-                    fontSize="large"
-                    classes={{ fontSizeLarge: classes.iconPlaceholder }}
-                  />
-                </Grid>
-              )}
-            </Grid>
-          )}
-          {isOpen && (
-            <Button
-              fullWidth
-              color="default"
-              variant="text"
-              onClick={this.toogleCameraMode}
-            >
-              Canvia a la càmera{' '}
-              {this.state.idealFacingMode === 'user' ? (
-                <CameraRear color="inherit" />
-              ) : (
-                <CameraFront color="inherit" />
-              )}
-            </Button>
-          )}
-        </Paper>
-      </>
+            ) : (
+              <Grid item onClick={openCamera}>
+                <AddAPhoto
+                  color="action"
+                  fontSize="large"
+                  classes={{ fontSizeLarge: classes.iconPlaceholder }}
+                />
+              </Grid>
+            )}
+          </Grid>
+        )}
+        {/* TODO: toogle not working in mobile */}
+        {isOpen && (
+          <Button
+            fullWidth
+            color="default"
+            variant="text"
+            onClick={this.toogleCameraMode}
+          >
+            Canvia a la càmera{' '}
+            {this.state.idealFacingMode === 'user' ? (
+              <CameraRear color="inherit" />
+            ) : (
+              <CameraFront color="inherit" />
+            )}
+          </Button>
+        )}
+      </Paper>
     )
   }
 }
