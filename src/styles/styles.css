@@ -24,3 +24,12 @@ body {
   /* Use momentum-based scrolling on iOS devices */
   -webkit-overflow-scrolling: touch;
 }
+
+a {
+  color: #9c27b0;
+  text-decoration: none;
+}
+/* Overrides the video tag width in ordert to fit inside the Grid item */
+.react-html5-camera-photo > video {
+  width: 100% !important;
+}
