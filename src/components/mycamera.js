@@ -25,11 +25,10 @@ class MyCamera extends Component {
     this.toogleCameraMode = this.toogleCameraMode.bind(this)
   }
 
-  toogleCameraMode(prevState) {
-    console.log(FACING_MODES)
-    if (prevState.idealFacingMode === 'user') {
+  toogleCameraMode() {
+    if (this.state.idealFacingMode === 'user') {
       this.setState({ idealFacingMode: FACING_MODES.ENVIRONMENT })
-    } else {
+    } else if (this.state.idealFacingMode === 'environment') {
       this.setState({ idealFacingMode: FACING_MODES.USER })
     }
   }
@@ -51,10 +50,9 @@ class MyCamera extends Component {
               onTakePhoto={dataUri => {
                 onTakePicture(dataUri)
               }}
-              //idealResolution={{ width: 1980, height: 1080 }}
+              idealResolution={{ width: 1980, height: 1080 }}
               isMaxResolution={true}
               imageType={IMAGE_TYPES.JPG}
-              sizeFactor={0.5}
             />
           </div>
         ) : (
@@ -75,7 +73,7 @@ class MyCamera extends Component {
             )}
           </Grid>
         )}
-        {/* TODO: toogle not working in mobile */}
+
         {isOpen && (
           <Button
             fullWidth
@@ -84,9 +82,10 @@ class MyCamera extends Component {
             onClick={this.toogleCameraMode}
           >
             Canvia a la càmera{' '}
-            {this.state.idealFacingMode === 'user' ? (
+            {this.state.idealFacingMode === 'user' && (
               <CameraRear color="inherit" />
-            ) : (
+            )}
+            {this.state.idealFacingMode === 'environment' && (
               <CameraFront color="inherit" />
             )}
           </Button>
