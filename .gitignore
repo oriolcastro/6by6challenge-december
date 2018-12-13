@@ -71,3 +71,5 @@ yarn-error.log
 
 # VS Code files
 .vscode
+.env.development
+.env.production
