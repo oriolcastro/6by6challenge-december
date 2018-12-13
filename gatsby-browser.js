@@ -3,6 +3,7 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { client } from './src/apollo/client'
 import uuidv1 from 'uuid/v1'
+import { initAuth } from './src/admin/services/auth'
 
 //Wrap the main component with the provedier from Apollo to query the graphql endpoint
 export const wrapRootElement = ({ element }) => (
@@ -22,5 +23,6 @@ export const onClientEntry = () => {
       const userId = uuidv1()
       window.localStorage.setItem('userId', userId)
     }
+    initAuth()
   }
 }

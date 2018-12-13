@@ -10,6 +10,7 @@ export const initAuth = () => {
   if (isBrowser()) {
     window.netlifyIdentity = netlifyIdentity
     // You must run this once before trying to interact with the widget
+    console.log('Netlify identity widget initialized')
     netlifyIdentity.init()
   }
 }
