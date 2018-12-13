@@ -31,11 +31,11 @@ class PostForm extends Component {
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${
-          process.env.CLOUDINARY_CLOUD_NAME
+          process.env.GATSBY_CLOUDINARY_CLOUD_NAME
         }/image/upload`,
         {
           file: this.props.capturedImage,
-          upload_preset: process.env.CLOUDINARY_CLOUD_PRESET,
+          upload_preset: process.env.GATSBY_CLOUDINARY_CLOUD_PRESET,
         }
       )
       console.log('Picture uploaded to Cloudinary')
