@@ -24,5 +24,6 @@ export const onClientEntry = () => {
       window.localStorage.setItem('userId', userId)
     }
     initAuth()
+    console.log('This is logged using the client entry')
   }
 }
