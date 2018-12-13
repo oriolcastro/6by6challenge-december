@@ -6,6 +6,9 @@ import Layout from '../components/layout'
 import AppWrap from '../components/appwrap'
 import withRoot from '../withRoot'
 
+import { initAuth } from '../admin/services/auth'
+initAuth()
+
 const IndexPage = () => (
   <Layout>
     <Grid container alignItems="flex-start" justify="space-around" spacing={24}>
