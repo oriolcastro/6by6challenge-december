@@ -6,5 +6,6 @@ export const client = new ApolloClient({
   fetch,
   headers: {
     'X-Hasura-Role': 'anonymous',
+    'X-Hasura-Access-Key': process.env.HASURA_GRAPHQL_ACCESS_KEY,
   },
 })
