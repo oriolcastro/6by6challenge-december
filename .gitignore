@@ -52,8 +52,7 @@ typings/
 *.tgz
 
 # dotenv environment variables file
-.env.development
-.env.production
+.env
 
 # gatsby files
 .cache/
@@ -71,5 +70,4 @@ yarn-error.log
 
 # VS Code files
 .vscode
-.env.development
-.env.production
+
