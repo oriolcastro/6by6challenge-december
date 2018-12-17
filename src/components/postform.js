@@ -14,6 +14,7 @@ class PostForm extends Component {
     this.state = {
       message: '',
       pictureUrl: '',
+      ClPublicId: '',
       isLoading: false,
       openSnackbar: false,
     }
@@ -39,7 +40,10 @@ class PostForm extends Component {
         }
       )
       console.log('Picture uploaded to Cloudinary')
-      this.setState({ pictureUrl: response.data.url })
+      this.setState({
+        pictureUrl: response.data.url,
+        ClPublicId: response.data.public_id,
+      })
     } catch (error) {
       console.log(error)
     }
@@ -71,6 +75,7 @@ class PostForm extends Component {
                     imgUrl: this.state.pictureUrl,
                     message: this.state.message,
                     user_id: this.props.userId,
+                    public_id: this.state.ClPublicId,
                   },
                 })
                 console.log('Post submited to the server')

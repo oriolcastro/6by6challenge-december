@@ -28,6 +28,7 @@ const Layout = ({ children }) => (
           ]}
         >
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width" />
           <html lang="ca" />
           <meta charSet="utf-8" />
         </Helmet>

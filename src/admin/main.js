@@ -1,30 +1,23 @@
 import React, { Component } from 'react'
-import { Link, navigate } from 'gatsby'
 
-import { getUser, logout } from './services/auth'
+import { getUser } from './services/auth'
+import Typography from '@material-ui/core/Typography'
+
+import PostsListWrapper from './components/postslistwrapper'
 
 class Main extends Component {
   render() {
     const user = getUser()
     return (
-      <>
-        <h1>Your Main App</h1>
-        <ul>
-          <li>API: {user.api && user.api.apiURL}</li>
-          <li>ID: {user.id}</li>
-        </ul>
-        <hr />
-
-        <a
-          href="/"
-          onClick={event => {
-            event.preventDefault()
-            logout(() => navigate(`/admin/login`))
-          }}
-        >
-          Logout
-        </a>
-      </>
+      <div style={{ padding: '8px' }}>
+        <Typography variant="body2" align="justify" paragraph>
+          Aquí pots revisar les diferents imatges que s'han publicat amb els
+          seus missatges. Pots eliminar les publicacions fent que no apareguin a
+          la pantalla o directament bloquejar l'usuari impedint mostrar les
+          seves publicacions.
+        </Typography>
+        <PostsListWrapper />
+      </div>
     )
   }
 }

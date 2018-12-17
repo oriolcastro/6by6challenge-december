@@ -50,8 +50,8 @@ class MyCamera extends Component {
               onTakePhoto={dataUri => {
                 onTakePicture(dataUri)
               }}
-              idealResolution={{ width: 1980, height: 1080 }}
-              isMaxResolution={true}
+              idealResolution={{ width: 1980, height: 1980 }}
+              isMaxResolution={false}
               imageType={IMAGE_TYPES.JPG}
             />
           </div>
