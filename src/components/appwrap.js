@@ -80,7 +80,7 @@ class AppWrap extends Component {
   takePicture(data) {
     //TODO: detect window.screen.orientation angle and apply rotation to the image befor store it in state
     const a = this.readDeviceOrientation()
-    console.log(a)
+    alert(`The screen is ${a} degrees`)
     this.rotateBase64Image(data, a, i => {
       this.setState({ capturedImage: data, isOpen: false, rotatedImage: i })
     })
