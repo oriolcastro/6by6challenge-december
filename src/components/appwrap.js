@@ -33,22 +33,15 @@ class AppWrap extends Component {
   }
 
   readDeviceOrientation() {
-    let angle = 0
-    switch (window.orientation) {
-      case 0:
-        angle = 0
-        break
-      case 180:
-        angle = 180
-        break
-      case -90:
-        angle = 90
-        break
-      case 90:
-        angle = 270
-        break
+    if (window.orientation === 180) {
+      return 180
+    } else if (window.orientation === -90) {
+      return 90
+    } else if (window.orientation === 90) {
+      return 270
+    } else {
+      return 0
     }
-    return angle
   }
 
   rotateBase64Image(base64data, givenDegrees, callback) {
