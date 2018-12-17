@@ -32,13 +32,7 @@ const Post = props => {
   return (
     <div className={classes.post}>
       <Card>
-        <Image
-          dpr="auto"
-          responsive
-          width="auto"
-          crop="scale"
-          publicId={imagePublicId}
-        >
+        <Image responsive width="auto" crop="scale" publicId={imagePublicId}>
           <Transformation quality="auto" fetchFormat="auto" />
         </Image>
         <CardContent>
