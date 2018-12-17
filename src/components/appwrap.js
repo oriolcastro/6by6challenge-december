@@ -15,7 +15,12 @@ class AppWrap extends Component {
         userId = window.localStorage.getItem('userId')
       }
     }
-    this.state = { userId: userId, isOpen: false, capturedImage: '' }
+    this.state = {
+      userId: userId,
+      isOpen: false,
+      capturedImage: '',
+      rotatedImage: '',
+    }
     this.takePicture = this.takePicture.bind(this)
     this.openCamera = this.openCamera.bind(this)
     this.deletePicture = this.deletePicture.bind(this)
@@ -26,8 +31,66 @@ class AppWrap extends Component {
       `userId in localstorage is ${window.localStorage.getItem('userId')}`
     )
   }
+
+  readDeviceOrientation() {
+    let angle = 0
+    switch (window.orientation) {
+      case 0:
+        angle = 0
+        break
+      case 180:
+        angle = 180
+        break
+      case -90:
+        angle = 90
+        break
+      case 90:
+        angle = 270
+        break
+    }
+    return angle
+  }
+
+  rotateBase64Image(base64data, givenDegrees, callback) {
+    const degrees = givenDegrees % 360
+    if (degrees % 90 !== 0 || degrees === 0) {
+      callback(base64data)
+      return
+    }
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    const image = new Image()
+    image.src = base64data
+    image.onload = function() {
+      if (degrees === 180) {
+        canvas.width = image.width
+        canvas.height = image.height
+      } else {
+        canvas.width = image.height
+        canvas.height = image.width
+      }
+      ctx.rotate((degrees * Math.PI) / 180)
+      if (degrees === 90) {
+        ctx.translate(0, -canvas.width)
+      } else if (degrees === 180) {
+        ctx.translate(-canvas.width, -canvas.height)
+      } else if (degrees === 270) {
+        ctx.translate(-canvas.height, 0)
+      }
+      ctx.drawImage(image, 0, 0)
+      callback(canvas.toDataURL('image/jpeg'))
+    }
+  }
+
   takePicture(data) {
-    this.setState({ capturedImage: data, isOpen: false })
+    //TODO: detect window.screen.orientation angle and apply rotation to the image befor store it in state
+    const a = this.readDeviceOrientation()
+    console.log(a)
+    this.rotateBase64Image(data, a, i => {
+      this.setState({ capturedImage: data, isOpen: false, rotatedImage: i })
+    })
   }
 
   async deletePicture() {
@@ -69,6 +132,7 @@ class AppWrap extends Component {
             )}
           </Mutation>
         </Grid>
+        <img src={this.state.rotatedImage} />
       </Grid>
     )
   }
