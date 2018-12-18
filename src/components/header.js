@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import { StaticQuery, graphql, navigate, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -27,15 +27,17 @@ const Header = ({ siteTitle }) => (
     `}
     render={data => (
       <div>
-        <div style={{ textAlign: 'center', margin: '8px' }}>
-          {data.file ? (
-            <Img fixed={data.file.childImageSharp.fixed} />
-          ) : (
-            <Typography variant="h3" color="primary">
-              {data.site.siteMetadata.title}
-            </Typography>
-          )}
-        </div>
+        <Link to="/">
+          <div style={{ textAlign: 'center', margin: '8px' }}>
+            {data.file ? (
+              <Img fixed={data.file.childImageSharp.fixed} />
+            ) : (
+              <Typography variant="h3" color="primary">
+                {data.site.siteMetadata.title}
+              </Typography>
+            )}
+          </div>
+        </Link>
         {isLoggedIn() && (
           <Button
             href="/"

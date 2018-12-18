@@ -19,11 +19,14 @@ class AppWrap extends Component {
       userId: userId,
       isOpen: false,
       capturedImage: '',
-      rotatedImage: '',
     }
     this.takePicture = this.takePicture.bind(this)
     this.openCamera = this.openCamera.bind(this)
     this.deletePicture = this.deletePicture.bind(this)
+    this.discardPicture = this.discardPicture.bind(this)
+    this.rotateImage = this.rotateImage.bind(this)
+    this.rotateImageLeft = this.rotateImageLeft.bind(this)
+    this.rotateImageRight = this.rotateImageRight.bind(this)
   }
 
   componentDidMount() {
@@ -32,58 +35,40 @@ class AppWrap extends Component {
     )
   }
 
-  readDeviceOrientation() {
-    if (window.orientation === 180) {
-      return 180
-    } else if (window.orientation === -90) {
-      return 90
-    } else if (window.orientation === 90) {
-      return 270
-    } else {
-      return 0
-    }
-  }
-
-  rotateBase64Image(base64data, givenDegrees, callback) {
-    const degrees = givenDegrees % 360
-    if (degrees % 90 !== 0 || degrees === 0) {
-      callback(base64data)
-      return
-    }
-
+  rotateImage(isClockwise) {
+    //Create offscreen canvas
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
-
+    //Create Image
     const image = new Image()
-    image.src = base64data
-    image.onload = function() {
-      if (degrees === 180) {
-        canvas.width = image.width
-        canvas.height = image.height
-      } else {
-        canvas.width = image.height
-        canvas.height = image.width
-      }
-      ctx.rotate((degrees * Math.PI) / 180)
-      if (degrees === 90) {
-        ctx.translate(0, -canvas.width)
-      } else if (degrees === 180) {
-        ctx.translate(-canvas.width, -canvas.height)
-      } else if (degrees === 270) {
-        ctx.translate(-canvas.height, 0)
-      }
-      ctx.drawImage(image, 0, 0)
-      callback(canvas.toDataURL('image/jpeg'))
+    image.src = this.state.capturedImage
+    //Set dimensions to rotated size
+    canvas.width = image.height
+    canvas.height = image.width
+    //Rotate and draw source image into off-screen canvas
+    if (isClockwise) {
+      ctx.rotate((90 * Math.PI) / 180)
+      ctx.translate(0, -canvas.width)
+    } else {
+      ctx.rotate((-90 * Math.PI) / 180)
+      ctx.translate(-canvas.height, 0)
     }
+    ctx.drawImage(image, 0, 0)
+
+    return canvas.toDataURL('image/jpeg', 100)
+  }
+
+  rotateImageRight() {
+    const i = this.rotateImage(true)
+    this.setState({ capturedImage: i })
+  }
+  rotateImageLeft() {
+    const i = this.rotateImage(false)
+    this.setState({ capturedImage: i })
   }
 
   takePicture(data) {
-    //TODO: detect window.screen.orientation angle and apply rotation to the image befor store it in state
-    const a = this.readDeviceOrientation()
-    alert(`The screen is ${a} degrees`)
-    this.rotateBase64Image(data, a, i => {
-      this.setState({ capturedImage: data, isOpen: false, rotatedImage: i })
-    })
+    this.setState({ capturedImage: data, isOpen: false })
   }
 
   async deletePicture() {
@@ -92,6 +77,10 @@ class AppWrap extends Component {
 
   openCamera() {
     this.setState({ isOpen: true })
+  }
+
+  discardPicture() {
+    this.setState({ capturedImage: '', isOpen: true })
   }
 
   render() {
@@ -108,6 +97,9 @@ class AppWrap extends Component {
             capturedImage={this.state.capturedImage}
             openCamera={this.openCamera}
             onTakePicture={this.takePicture}
+            rotateImageRight={this.rotateImageRight}
+            rotateImageLeft={this.rotateImageLeft}
+            discardPicture={this.discardPicture}
           />
         </Grid>
         <Grid item lg={4} md={4} sm={10} xl={10} xs={12}>
@@ -125,7 +117,6 @@ class AppWrap extends Component {
             )}
           </Mutation>
         </Grid>
-        <img src={this.state.rotatedImage} />
       </Grid>
     )
   }
