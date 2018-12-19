@@ -17,6 +17,8 @@ class PostForm extends Component {
       ClPublicId: '',
       isLoading: false,
       openSnackbar: false,
+      caractersLimit: false,
+      maxMessageLength: 100,
     }
     this.handleChange = this.handleChange.bind(this)
     this.uploadPicture = this.uploadPicture.bind(this)
@@ -50,7 +52,11 @@ class PostForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({ message: event.target.value })
+    if (event.target.value.length < this.state.maxMessageLength){
+      this.setState({ message: event.target.value, caractersLimit: false })
+    }else{
+      this.setState({caractersLimit: true})
+    }
   }
 
   handleCloseSnackbar(event, reason) {
@@ -92,10 +98,15 @@ class PostForm extends Component {
                 disabled={this.props.capturedImage ? false : true}
                 fullWidth
                 required
+                error={this.state.caractersLimit}
+                helperText='Màxim 100 caracters'
                 label="Missatge"
                 placeholder="Escriu aquí el teu missatge"
                 margin="normal"
                 variant="outlined"
+                multiline
+                rows='2'
+                rowsMax='3'
                 value={this.state.message}
                 onChange={this.handleChange}
               />
