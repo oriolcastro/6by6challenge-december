@@ -31,7 +31,8 @@ const SlideAnimatedContainer = posed.div({
 class Slideshow extends Component {
   constructor(props) {
     super(props)
-    this.state = { slides: [], currentSlide: 0, numSlides: 0 }
+    this.state = { slides: [], currentSlideIndex: 0, numSlides: 0 }
+    this.nextSlide = this.nextSlide.bind(this)
   }
 
   componentDidMount() {
@@ -39,22 +40,25 @@ class Slideshow extends Component {
       slides: this.props.children,
       numSlides: this.props.children.length,
     })
-    this.interval = setInterval(() => {
-      if (this.state.currentSlide + 1 < this.state.numSlides) {
-        this.setState({ currentSlide: this.state.currentSlide + 1 })
-      } else {
-        this.setState({ currentSlide: 0 })
-      }
-    }, this.props.duration)
+    this.interval = setInterval(this.nextSlide, this.props.duration)
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.children.length !== prevProps.children.length)
-      //Quan rebo nous children, es a dir que s'ha actualitzat
+    if (this.props.children.length !== prevProps.children.length) {
       this.setState({
         slides: this.props.children,
         numSlides: this.props.children.length,
       })
+    }
+  }
+
+  nextSlide(prevState) {
+    if (this.state.currentSlideIndex + 1 < this.state.numSlides) {
+      const currentSlideIndex = this.state.currentSlideIndex
+      this.setState({ currentSlideIndex: currentSlideIndex + 1 })
+    } else {
+      this.setState({ currentSlideIndex: 0 })
+    }
   }
 
   componentWillUnmount() {
@@ -62,14 +66,13 @@ class Slideshow extends Component {
   }
 
   render() {
-    console.log(this.props.children)
-    const currentSlide = this.state.currentSlide
+    const currentSlide = this.state.slides[this.state.currentSlideIndex]
 
     return (
       <div style={{ backgroundColor: 'black' }}>
         <PoseGroup>
-          <SlideAnimatedContainer key={this.state.currentSlide}>
-            {this.props.children[currentSlide]}
+          <SlideAnimatedContainer key={this.state.currentSlideIndex}>
+            {currentSlide}
           </SlideAnimatedContainer>
         </PoseGroup>
       </div>
