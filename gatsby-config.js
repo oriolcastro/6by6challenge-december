@@ -28,7 +28,7 @@ module.exports = {
         name: config.siteTitle,
         short_name: config.siteTitle,
         start_url: config.siteUrl,
-        background_color: '#663399',
+        background_color: config.backgroundColor,
         theme_color: config.themeColor,
         display: 'minimal-ui', // This path is relative to the root of the site.
       },
