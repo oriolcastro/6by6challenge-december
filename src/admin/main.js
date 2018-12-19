@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-
-import { getUser } from './services/auth'
 import Typography from '@material-ui/core/Typography'
 
 import PostsListWrapper from './components/postslistwrapper'
 
 class Main extends Component {
   render() {
-    const user = getUser()
+    
     return (
       <div style={{ padding: '8px' }}>
         <Typography variant="body2" align="justify" paragraph>

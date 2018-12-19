@@ -9,8 +9,7 @@ import { Mutation } from 'react-apollo'
 import { Image, Transformation } from 'cloudinary-react'
 
 import { withStyles } from '@material-ui/core/styles'
-import TestImage from '../../../src/images/test-image.jpeg'
-import { DELETE_POST, BAN_USER, GET_POSTS } from '../../apollo/queries'
+import { DELETE_POST, BAN_USER } from '../../apollo/queries'
 
 const styles = theme => ({
   media: {
@@ -36,9 +35,6 @@ const Post = props => {
           <Transformation quality="auto" fetchFormat="auto" />
         </Image>
         <CardContent>
-          {/* <Typography gutterBottom variant="h6">
-            Missatge
-          </Typography> */}
           <Typography variant="body2">{message}</Typography>
         </CardContent>
         <CardActions>

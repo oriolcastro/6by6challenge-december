@@ -18,7 +18,7 @@ class PostsListWrapper extends Component {
           cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
           secure
         >
-          <Query query={GET_POSTS}>
+          <Query query={GET_POSTS} pollInterval={600000}>
             {({ loading, error, data, refetch }) => {
               if (loading) return null
               if (error) return `Error: ${error}`

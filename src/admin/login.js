@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { navigate } from 'gatsby'
 
-import { handleLogin, isLoggedIn } from './services/auth'
+import { handleLogin } from './services/auth'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
