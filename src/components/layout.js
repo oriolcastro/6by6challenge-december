@@ -32,7 +32,7 @@ const Layout = ({ children }) => (
           <meta charSet="utf-8" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div style={{ flex: '1', margin: '8px' }}>{children}</div>
+        <div style={{ flex: '1', padding: '8px', marginBottom: '32px' }}>{children}</div>
         <Footer />
       </div>
     )}
