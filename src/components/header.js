@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 
 import { isLoggedIn, logout } from '../admin/services/auth'
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <StaticQuery
     query={graphql`
       query HeaderQuery {

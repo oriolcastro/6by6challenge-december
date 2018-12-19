@@ -57,7 +57,6 @@ class MyCamera extends Component {
               onTakePicture(dataUri)
             }}
             idealResolution={{ width: 1980, height: 1980 }}
-            isMaxResolution={true}
             imageType={IMAGE_TYPES.JPG}
             isImageMirror={false}
           />
@@ -67,7 +66,7 @@ class MyCamera extends Component {
               <img
                 src={capturedImage}
                 style={{ width: '100%', display: 'block' }}
-                alt='The images taken with the camera'
+                alt="The images taken with the camera"
               />
             ) : (
               <Grid container justify="center" alignItems="center">
