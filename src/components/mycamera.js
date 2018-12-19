@@ -25,15 +25,19 @@ class MyCamera extends Component {
     super(props)
     this.state = {
       idealFacingMode: FACING_MODES.ENVIRONMENT,
+      isImageMirror: false,
     }
     this.toogleCameraMode = this.toogleCameraMode.bind(this)
   }
 
   toogleCameraMode() {
     if (this.state.idealFacingMode === 'user') {
-      this.setState({ idealFacingMode: FACING_MODES.ENVIRONMENT })
+      this.setState({
+        idealFacingMode: FACING_MODES.ENVIRONMENT,
+        isImageMirror: false,
+      })
     } else if (this.state.idealFacingMode === 'environment') {
-      this.setState({ idealFacingMode: FACING_MODES.USER })
+      this.setState({ idealFacingMode: FACING_MODES.USER, isImageMirror: true })
     }
   }
 
@@ -58,7 +62,7 @@ class MyCamera extends Component {
             }}
             idealResolution={{ width: 1980, height: 1980 }}
             imageType={IMAGE_TYPES.JPG}
-            isImageMirror={false}
+            isImageMirror={this.state.isImageMirror}
           />
         ) : (
           <div>
