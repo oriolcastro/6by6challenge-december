@@ -13,7 +13,7 @@ class PostsListWrapper extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <CloudinaryContext
           cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
           secure
@@ -27,7 +27,7 @@ class PostsListWrapper extends Component {
             }}
           </Query>
         </CloudinaryContext>
-      </div>
+      </>
     )
   }
 }

@@ -26,37 +26,37 @@ const Header = () => (
       }
     `}
     render={data => (
-      <div>
+      <div style={{ padding: '16px 24px' }}>
         <Link to="/">
-          <div style={{ textAlign: 'center', margin: '8px' }}>
+          <div style={{ textAlign: 'center' }}>
             {data.file ? (
               <Img fixed={data.file.childImageSharp.fixed} />
             ) : (
-              <Typography variant="h3" color="primary">
+              <Typography variant="h3" color="primary" gutterBottom>
                 {data.site.siteMetadata.title}
               </Typography>
             )}
           </div>
         </Link>
         {isLoggedIn() && (
-          <Button
-            href="/"
-            onClick={event => {
-              event.preventDefault()
-              logout(() => navigate(`/admin/login`))
-            }}
-            variant="outlined"
-            color="primary"
-            size="small"
-            style={{
-              position: 'absolute',
-              top: '16px',
-              right: '16px',
-              zIndex: 10,
-            }}
-          >
-            Surt
-          </Button>
+          <>
+            <Typography variant="body2" style={{ padding: '8px' }}>
+              Estàs logejat com a administrador
+            </Typography>
+            <Button
+              href="/"
+              onClick={event => {
+                event.preventDefault()
+                logout(() => navigate(`/admin/login`))
+              }}
+              color="primary"
+              variant="outlined"
+              size="small"
+              fullWidth
+            >
+              Surt
+            </Button>
+          </>
         )}
       </div>
     )}

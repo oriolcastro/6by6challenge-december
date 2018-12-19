@@ -12,9 +12,6 @@ import { withStyles } from '@material-ui/core/styles'
 import { DELETE_POST, BAN_USER } from '../../apollo/queries'
 
 const styles = theme => ({
-  media: {
-    height: 300,
-  },
   post: {
     marginBottom: theme.spacing.unit * 3,
   },
@@ -29,8 +26,8 @@ const Post = props => {
     userId,
   } = props
   return (
-    <div className={classes.post}>
-      <Card>
+    <>
+      <Card className={classes.post}>
         <Image responsive width="auto" crop="scale" publicId={imagePublicId}>
           <Transformation quality="auto" fetchFormat="auto" />
         </Image>
@@ -70,7 +67,7 @@ const Post = props => {
           </Mutation>
         </CardActions>
       </Card>
-    </div>
+    </>
   )
 }
 

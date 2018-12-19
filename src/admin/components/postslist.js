@@ -18,7 +18,7 @@ class PostsList extends Component {
   render() {
     const { posts } = this.state
     return (
-      <div>
+      <>
         {posts.map(post => (
           <Post
             key={post.id}
@@ -29,7 +29,7 @@ class PostsList extends Component {
             refetch={this.props.refetch}
           />
         ))}
-      </div>
+      </>
     )
   }
 }
