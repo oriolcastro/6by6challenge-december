@@ -60,7 +60,7 @@ class MyCamera extends Component {
             onTakePhoto={dataUri => {
               onTakePicture(dataUri)
             }}
-            idealResolution={{ width: 1980, height: 1980 }}
+            idealResolution={{ width: 1080, height: 1080 }}
             imageType={IMAGE_TYPES.JPG}
             isImageMirror={this.state.isImageMirror}
           />
