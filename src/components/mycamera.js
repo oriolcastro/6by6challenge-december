@@ -13,6 +13,8 @@ import RotateLeft from '@material-ui/icons/RotateLeft'
 import RotateRight from '@material-ui/icons/RotateRight'
 import Delete from '@material-ui/icons/Delete'
 
+import { isBrowser } from '../admin/services/auth'
+
 const styles = theme => ({
   iconPlaceholder: {
     fontSize: theme.typography.fontSize * 10,
@@ -24,20 +26,56 @@ class MyCamera extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      idealFacingMode: FACING_MODES.ENVIRONMENT,
-      isImageMirror: false,
+      idealFacingMode: FACING_MODES.USER,
+      isImageMirror: true,
+      numOfCameras: 0,
     }
     this.toogleCameraMode = this.toogleCameraMode.bind(this)
   }
 
+  componentDidMount() {
+    //On mount check if the device can use the getMediaUser API and also counts the number of cameras available to the browser.
+    //If there is only one camera (laptops and some mobiles devices) then the button to toogle the camera mode is not shown.
+
+    if (isBrowser) {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        console.log('The device can use the app')
+        navigator.mediaDevices
+          .enumerateDevices()
+          .then(devices => {
+            let numOfCameras = 0
+            devices.forEach(device => {
+              if (device.kind === 'videoinput') {
+                ++numOfCameras
+              }
+            })
+            console.log('Number of cameras:' + numOfCameras)
+            this.setState({ numOfCameras: numOfCameras })
+          })
+          .catch(err => {
+            console.log(err.name + ': ' + err.message)
+          })
+      } else {
+        alert(
+          'Ens sap greu però el teu dispositiu no està suportat i la càmera no funcionarà.'
+        )
+      }
+    }
+  }
+
   toogleCameraMode() {
-    if (this.state.idealFacingMode === 'user') {
-      this.setState({
-        idealFacingMode: FACING_MODES.ENVIRONMENT,
-        isImageMirror: false,
-      })
-    } else if (this.state.idealFacingMode === 'environment') {
-      this.setState({ idealFacingMode: FACING_MODES.USER, isImageMirror: true })
+    if (this.state.numOfCameras > 1) {
+      if (this.state.idealFacingMode === 'user') {
+        this.setState({
+          idealFacingMode: FACING_MODES.ENVIRONMENT,
+          isImageMirror: false,
+        })
+      } else if (this.state.idealFacingMode === 'environment') {
+        this.setState({
+          idealFacingMode: FACING_MODES.USER,
+          isImageMirror: true,
+        })
+      }
     }
   }
 
@@ -85,7 +123,7 @@ class MyCamera extends Component {
             )}
           </div>
         )}
-        {isOpen && (
+        {isOpen && this.state.numOfCameras > 1 && (
           <Button
             fullWidth
             color="default"

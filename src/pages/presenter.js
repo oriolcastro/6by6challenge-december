@@ -6,7 +6,6 @@ import { CloudinaryContext } from 'cloudinary-react'
 import { GET_POSTS } from '../apollo/queries'
 import Sidebar from '../components/sidebar'
 import Slideshow from '../components/slideshow'
-import Slide from '../components/slide'
 import withRoot from '../withRoot'
 
 const PresenterPage = () => {
