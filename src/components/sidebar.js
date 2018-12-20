@@ -32,8 +32,8 @@ const Sidebar = () => (
             }}
           >
             <Typography variant="h4" paragraph>
-              Per a publicar una imatge i que aparegui en pantalla ves a:{' '}
-              {data.site.siteMetadata.siteUrl}
+              Per a publicar una imatge i que aparegui en pantalla ves a:
+              rebrand.ly/NitdeReines
             </Typography>
             <QRCode
               value={data.site.siteMetadata.siteUrl}
@@ -43,8 +43,8 @@ const Sidebar = () => (
               style={{ margin: '24px auto' }}
             />
             <Typography variant="h5" style={{ margin: '24px auto' }}>
-              Les publicacions amb contingut ofensiu o que representi un atac
-              individual o a qualsevol col·lectiu seran eliminades.
+              Les publicacions amb contingut ofensiu, que representi un atac
+              individual o cap a qualsevol col·lectiu seran eliminades.
             </Typography>
           </div>
         </Grid>
