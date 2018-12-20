@@ -14,11 +14,20 @@ const messageContainer = {
 }
 
 const Slide = forwardRef((props, ref) => (
-  <div ref={ref} style={{ position: 'absolute' }}>
+  <div
+    ref={ref}
+    style={{
+      position: 'absolute',
+      height: '100vh',
+      width: '100vh',
+      backgroundColor: '#000',
+    }}
+  >
     <Image
       responsive
+      crop="lpad"
       width="auto"
-      crop="scale"
+      height={props.height}
       publicId={props.post.CloudinaryPublicId}
     >
       <Transformation quality="auto" fetchFormat="auto" />

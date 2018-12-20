@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types'
 import posed from 'react-pose'
 
 import Slide from './slide'
+import { isBrowser } from '../admin/services/auth'
 
 const AnimatedSlide = posed(Slide)({
   display: {
@@ -28,14 +29,22 @@ const AnimatedSlide = posed(Slide)({
 class Slideshow extends Component {
   constructor(props) {
     super(props)
-    this.state = { slides: [], currentSlideIndex: 0, numSlides: 0 }
+    this.state = {
+      slides: [],
+      currentSlideIndex: 0,
+      numSlides: 0,
+      screenHeight: 0,
+    }
     this.nextSlide = this.nextSlide.bind(this)
   }
 
   componentDidMount() {
-    this.setState({
-      numSlides: this.props.slides.length,
-    })
+    if (isBrowser) {
+      this.setState({
+        numSlides: this.props.slides.length,
+        screenHeight: window.innerHeight,
+      })
+    }
     console.log(this.props.slides.length)
     this.interval = setInterval(this.nextSlide, this.props.duration)
   }
@@ -70,6 +79,7 @@ class Slideshow extends Component {
             pose={currentSlide === i ? 'display' : 'hidde'}
             post={post}
             key={i}
+            height={this.state.screenHeight}
           />
         ))}
       </div>
