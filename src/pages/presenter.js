@@ -7,6 +7,7 @@ import { GET_POSTS } from '../apollo/queries'
 import Sidebar from '../components/sidebar'
 import Slideshow from '../components/slideshow'
 import Slide from '../components/slide'
+import withRoot from '../withRoot'
 
 const PresenterPage = () => {
   return (
@@ -26,13 +27,7 @@ const PresenterPage = () => {
                   if (loading) return null
                   if (error) return `Error: ${error}`
                   console.log({ data })
-                  return (
-                    <Slideshow duration={5000}>
-                      {data.posts.map(post => (
-                        <Slide post={post} key={post.id} />
-                      ))}
-                    </Slideshow>
-                  )
+                  return <Slideshow duration={5000} slides={data.posts} />
                 }}
               </Query>
             </CloudinaryContext>
@@ -43,4 +38,4 @@ const PresenterPage = () => {
   )
 }
 
-export default PresenterPage
+export default withRoot(PresenterPage)

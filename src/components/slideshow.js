@@ -1,28 +1,25 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
-import posed, { PoseGroup } from 'react-pose'
+import posed from 'react-pose'
 
-const SlideAnimatedContainer = posed.div({
-  enter: {
+import Slide from './slide'
+
+const AnimatedSlide = posed(Slide)({
+  display: {
     opacity: 1,
-    scale: 1,
     z: 1,
     transition: {
       default: {
         duration: 500,
-        ease: 'linear',
       },
     },
   },
-  exit: {
+  hidde: {
     opacity: 0,
-    scale: 0.5,
     z: 0,
-    delay: 250,
     transition: {
       default: {
-        duration: 250,
-        ease: 'linear',
+        duration: 500,
       },
     },
   },
@@ -37,17 +34,16 @@ class Slideshow extends Component {
 
   componentDidMount() {
     this.setState({
-      slides: this.props.children,
-      numSlides: this.props.children.length,
+      numSlides: this.props.slides.length,
     })
+    console.log(this.props.slides.length)
     this.interval = setInterval(this.nextSlide, this.props.duration)
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.children.length !== prevProps.children.length) {
+    if (this.props.slides.length !== prevProps.slides.length) {
       this.setState({
-        slides: this.props.children,
-        numSlides: this.props.children.length,
+        numSlides: this.props.slides.length,
       })
     }
   }
@@ -66,15 +62,16 @@ class Slideshow extends Component {
   }
 
   render() {
-    const currentSlide = this.state.slides[this.state.currentSlideIndex]
-
+    const currentSlide = this.state.currentSlideIndex
     return (
       <div style={{ backgroundColor: 'black' }}>
-        <PoseGroup>
-          <SlideAnimatedContainer key={this.state.currentSlideIndex}>
-            {currentSlide}
-          </SlideAnimatedContainer>
-        </PoseGroup>
+        {this.props.slides.map((post, i) => (
+          <AnimatedSlide
+            pose={currentSlide === i ? 'display' : 'hidde'}
+            post={post}
+            key={i}
+          />
+        ))}
       </div>
     )
   }
@@ -84,4 +81,5 @@ export default Slideshow
 
 Slideshow.propTypes = {
   duration: PropTypes.number,
+  slides: PropTypes.array,
 }
