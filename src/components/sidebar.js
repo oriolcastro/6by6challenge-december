@@ -20,14 +20,17 @@ const Sidebar = () => (
     `}
     render={data => (
       <Grid container direction="column" style={{ height: '100%' }}>
-        <Grid item style={{ marginTop: '48px' }}>
+        <Grid item style={{ marginTop: '24px' }}>
           <Header />
         </Grid>
-        <Grid item style={{ flexGrow: 1 }}>
-          <div style={{ margin: '48px' }}>
-            <Typography paragraph variant="h2">
-              Benvingudes!
-            </Typography>
+        <Grid item style={{ flex: 1 }}>
+          <div
+            style={{
+              margin: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
             <Typography variant="h4" paragraph>
               Per a publicar una imatge i que aparegui en pantalla ves a:{' '}
               {data.site.siteMetadata.siteUrl}
@@ -35,9 +38,13 @@ const Sidebar = () => (
             <QRCode
               value={data.site.siteMetadata.siteUrl}
               renderAs="svg"
-              fgColor="#3f51b5"
+              fgColor="#673ab7"
               size={200}
+              style={{ margin: '24px auto' }}
             />
+            <Typography variant="h5" style={{ margin: '24px auto' }}>
+              Les publicacions que ..... seran eliminades
+            </Typography>
           </div>
         </Grid>
         <Grid item>
