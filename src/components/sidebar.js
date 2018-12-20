@@ -43,7 +43,8 @@ const Sidebar = () => (
               style={{ margin: '24px auto' }}
             />
             <Typography variant="h5" style={{ margin: '24px auto' }}>
-              Les publicacions que ..... seran eliminades
+              Les publicacions amb contingut ofensiu o que representi un atac
+              individual o a qualsevol col·lectiu seran eliminades.
             </Typography>
           </div>
         </Grid>
