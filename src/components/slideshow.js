@@ -41,6 +41,7 @@ class Slideshow extends Component {
   componentDidMount() {
     if (isBrowser) {
       this.setState({
+        slides: this.props.slides,
         numSlides: this.props.slides.length,
         screenHeight: window.innerHeight,
       })
@@ -52,12 +53,13 @@ class Slideshow extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.slides.length !== prevProps.slides.length) {
       this.setState({
+        slides: this.props.slides,
         numSlides: this.props.slides.length,
       })
     }
   }
 
-  nextSlide(prevState) {
+  nextSlide() {
     if (this.state.currentSlideIndex + 1 < this.state.numSlides) {
       const currentSlideIndex = this.state.currentSlideIndex
       this.setState({ currentSlideIndex: currentSlideIndex + 1 })
@@ -71,12 +73,12 @@ class Slideshow extends Component {
   }
 
   render() {
-    const currentSlide = this.state.currentSlideIndex
+    const currentSlideIndex = this.state.currentSlideIndex
     return (
       <div style={{ backgroundColor: 'black' }}>
-        {this.props.slides.map((post, i) => (
+        {this.state.slides.map((post, i) => (
           <AnimatedSlide
-            pose={currentSlide === i ? 'display' : 'hidde'}
+            pose={currentSlideIndex === i ? 'display' : 'hidde'}
             post={post}
             key={i}
             height={this.state.screenHeight}

@@ -59,12 +59,12 @@ class AppWrap extends Component {
   }
 
   rotateImageRight() {
-    const i = this.rotateImage(true)
-    this.setState({ capturedImage: i })
+    const imgRotated = this.rotateImage(true)
+    this.setState({ capturedImage: imgRotated })
   }
   rotateImageLeft() {
-    const i = this.rotateImage(false)
-    this.setState({ capturedImage: i })
+    const imgRotated = this.rotateImage(false)
+    this.setState({ capturedImage: imgRotated })
   }
 
   takePicture(data) {

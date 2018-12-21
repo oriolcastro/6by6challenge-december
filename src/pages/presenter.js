@@ -26,7 +26,7 @@ const PresenterPage = () => {
                   if (loading) return null
                   if (error) return `Error: ${error}`
                   console.log({ data })
-                  return <Slideshow duration={3000} slides={data.posts} />
+                  return <Slideshow duration={6000} slides={data.posts} />
                 }}
               </Query>
             </CloudinaryContext>

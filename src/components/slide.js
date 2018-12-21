@@ -21,6 +21,7 @@ const Slide = forwardRef((props, ref) => (
       height: '100vh',
       width: '100vh',
       backgroundColor: '#000',
+      right: '0',
     }}
   >
     <Image
