@@ -1,3 +1,1 @@
-<h1 align="center">
-  Jumbocall
-</h1>
+![logo](./src/images/jumbocall.png)
