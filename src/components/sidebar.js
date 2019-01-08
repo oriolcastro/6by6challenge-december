@@ -1,11 +1,11 @@
-import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import QRCode from 'qrcode.react'
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import QRCode from 'qrcode.react';
 
-import Footer from '../components/footer'
-import Header from '../components/header'
+import Footer from "./footer";
+import Header from "./header";
 
 const Sidebar = () => (
   <StaticQuery
@@ -33,7 +33,7 @@ const Sidebar = () => (
           >
             <Typography variant="h4" paragraph>
               Per a publicar una imatge i que aparegui en pantalla ves a:
-              rebrand.ly/NitdeReines
+              YOUR_LINK_HERE
             </Typography>
             <QRCode
               value={data.site.siteMetadata.siteUrl}
@@ -54,6 +54,6 @@ const Sidebar = () => (
       </Grid>
     )}
   />
-)
+);
 
-export default Sidebar
+export default Sidebar;
