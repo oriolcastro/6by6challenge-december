@@ -1,5 +1,6 @@
 {
   "name": "Jumbocall-6by6Desember",
+  "private": true,
   "description": "Jumbocall",
   "version": "1.0.0",
   "author": "Oriol Castro <hola@okstudio.tech>",
