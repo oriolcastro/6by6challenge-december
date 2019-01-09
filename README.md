@@ -1,9 +1,6 @@
 <p align="center">
     <img alt="Gatsby" src="./src/images/jumbocall.png" />
 </p>
-<h2 align="center">
-  December's project from 6by6 Challenge
-</h2>
 
 ## CATALAN
 
@@ -53,9 +50,9 @@ This is the december's project from 6by6 challenge (no english article yet).
 - [Cloudinary](https://cloudinary.com/) as media manager and storage.
 - Deployed to [Netlify](https://www.netlify.com/). CDN.
 
-### 📄 Informació
+### 📄 Information
 
-Articles are only in catalan for now. The LAB section in my website, [Ok! Studio](https://www.okstudio.tech/lab), s only in catalan but you can explore the projects and see the final results.
+Articles are only in catalan for now. The LAB section in my website, [Ok! Studio](https://www.okstudio.tech/lab), is only in catalan but you can explore the projects and see the final results.
 
 ### 🧪 Demo
 
