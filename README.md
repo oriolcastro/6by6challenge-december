@@ -5,7 +5,7 @@
   December's project from 6by6 Challenge
 </h2>
 
-## **CATALAN**
+## CATALAN
 
 Aquest és el projecte del mes de decembre dins el [#Repte6by6](https://oriolcastro.me/blog/2018-11-05-el-repte-6by6/)
 
@@ -26,13 +26,15 @@ Aquest és el projecte del mes de decembre dins el [#Repte6by6](https://oriolcas
 ### 📄 Informació
 
 Pots llegir més informació sobre el projecte al meu blog [aquí](https://oriolcastro.me/blog/2018-12-12-projecte-1-desembre-repte6by6/) i [aquí](https://oriolcastro.me/blog/2019-01-02-projecte-1-desembre-repte6by6-resultat/).
-També pots consultar l'apartar LAB a la meva web [Ok! Studio](https://www.okstudio.tech/lab).
+També pots consultar l'apartar LAB de la meva web [Ok! Studio](https://www.okstudio.tech/lab).
 
 ### 🧪 Demo
 
 Accedeix a la demo [aquí](https://6by6challenge-december.netlify.com/).
 
-## **ENGLISH**
+---
+
+## ENGLISH
 
 This is the december's project from 6by6 challenge (no english article yet).
 
@@ -53,7 +55,7 @@ This is the december's project from 6by6 challenge (no english article yet).
 
 ### 📄 Informació
 
-Articles only in catalan for now. Also the LAB section in my website, [Ok! Studio](https://www.okstudio.tech/lab), is only in catalan but you can explore the projects and see the final resuts.
+Articles are only in catalan for now. The LAB section in my website, [Ok! Studio](https://www.okstudio.tech/lab), s only in catalan but you can explore the projects and see the final results.
 
 ### 🧪 Demo
 
