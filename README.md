@@ -34,7 +34,7 @@ Accedeix a la demo [aquí](https://6by6challenge-december.netlify.com/).
 
 ---
 
-## ENGLISH
+## ENGLISH
 
 This is the december's project from 6by6 challenge (no english article yet).
 
